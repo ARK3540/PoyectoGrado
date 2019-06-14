@@ -29,7 +29,7 @@ centro=(10,220)
 ANCHO=300
 ALTO=300
 pygame.init()                                                                   #Inicializamos los modulos de pygame
-pantalla=pygame.display.set_mode([ANCHO,ALTO])                                  #Creamos una ventana
+pantalla=pygame.display.set_mode([ANCHO,ALTO])					#Creamos una ventana
 pantalla.fill(BLANCO)                                                           #Llenamos la ventana de un color solido
 #pygame.draw.circle(pantalla,NEGRO,centro,3)                                     #Funcion circulo (plano,color,posicion,radio)
 fuente=pygame.font.Font("dalila.ttf",25)                                        #fuente y tamanos a variables
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     lttnota='O'
     vatTerminal=0
 
-    wh
+    
     '''
     opciones=[Opcion("Grabar",(60,25),60,1,0),Opcion("Prueba",(60,80),60,2,0),Opcion("Prueba",(60,135),60,3,0),Opcion("Cerrar",(60,190),60,4,0)]
     fondo=pygame.image.load('fondovioleta.jpg').convert()
