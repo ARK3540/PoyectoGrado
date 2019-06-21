@@ -1,5 +1,6 @@
 import math                                                                      #Operaciones matematicas simples
-import pygame                                                                    #Entorno grafico de python
+import pygame
+from pygame.locals import*                                                                    #Entorno grafico de python
 import random                                                                    #Uso de variables ramdom
 import seaborn                                                                   #representacion de datos graficos
 import librosa                                                                   #Analalisis manejo de audio
@@ -28,11 +29,12 @@ GRIS=(145,145,145)
 centro=(10,220)
 ANCHO=300
 ALTO=300
-pygame.init()                                                                   #Inicializamos los modulos de pygame
-pantalla=pygame.display.set_mode([ANCHO,ALTO])					#Creamos una ventana
-pantalla.fill(BLANCO)                                                           #Llenamos la ventana de un color solido
-#pygame.draw.circle(pantalla,NEGRO,centro,3)                                     #Funcion circulo (plano,color,posicion,radio)
-fuente=pygame.font.Font("dalila.ttf",25)                                        #fuente y tamanos a variables
+pygame.init()
+pantalla = pygame.display.set_mode([ANCHO,ALTO])
+pantalla.fill(BLANCO)
+pygame.display.set_caption("Menu")
+#Asignamos de fuentes y tamano de Texto a variables global
+fuente=pygame.font.Font("dalila.ttf",25)
 Numero = pygame.font.Font("dalila.ttf",25)
 Numero2 = pygame.font.Font("dalila.ttf",18)
 tiponota = pygame.font.Font("dalila.ttf",90)
@@ -152,11 +154,8 @@ def cargar():
       FrecNota=f[result_args[0]]
       print FrecNota,                                                            #<<<<<--------
       return FrecNota
-
-
 #main
 if __name__ == '__main__':
-
 
     pygame.display.flip()
     dibujo=0
@@ -164,43 +163,17 @@ if __name__ == '__main__':
     time=2000
     lttnota='O'
     vatTerminal=0
-
-    
-    '''
     opciones=[Opcion("Grabar",(60,25),60,1,0),Opcion("Prueba",(60,80),60,2,0),Opcion("Prueba",(60,135),60,3,0),Opcion("Cerrar",(60,190),60,4,0)]
     fondo=pygame.image.load('fondovioleta.jpg').convert()
-    todos=pygame.sprite.Group()
-    #todos.add(n)
     while aux:
         puntos=[]
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 aux=False
-            if event.type==pygame.MOUSEBUTTONDOWN:
+            '''if event.type==pygame.MOUSEBUTTONDOWN:
                 for op in opciones:
-                    if op.rect.collidepoint(pygame.mouse.get_pos()):
-                        if op.ido==1:
-                            dibujo=1
-                            op.actual=1
-                            pygame.display.set_mode([600,300])
-                            fondo=pygame.image.load('TablaturaPlantilla.png').convert()
+                    if op.rect.collidepoint(pygame.mouse.get_pos()):'''
 
-                        if op.ido==2:
-                            dibujo=2
-                            op.actual=1
-
-                        if op.ido==3:
-                            dibujo=3
-                            op.actual=1
-
-                        if op.ido==4:
-                            dibujo=4
-                            op.actual=1
-                            sys.exit()
-
-                    for op2 in opciones:
-                        if op2.ido!=dibujo:
-                            op2.actual=0
         #pantalla.fill(BLANCO)
         pantalla.blit(fondo,(0,0))
         for op in opciones:
@@ -211,17 +184,16 @@ if __name__ == '__main__':
             op.dibujar()
         #Redibujado y actualizacion
 
-        #Acoplar frecuencia en  la escala segun la nota a afinar'''
+        #Acoplar frecuencia en  la escala segun la nota a afinar
 	'''if time==2000:
            frec=int(cargar())
 	   time=0
-	time+=1'''
-        '''if frec>=(nota-5) and frec <= (nota+5):
+	time+=1
+        if frec>=(nota-5) and frec <= (nota+5):
 		          notadp = tiponota.render(lttnota,0,VERDE)
         else:
 		notadp = tiponota.render(lttnota,0,ROJO)
 
         pantalla.blit(notadp,[500,140])'''
-        ########################################################
-        todos.draw(pantalla)
-        pygame.display.update()
+
+    pygame.display.update()
