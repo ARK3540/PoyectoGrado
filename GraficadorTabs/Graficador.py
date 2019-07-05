@@ -11,7 +11,9 @@ import struct                                                                   
 import wave                                                                      #Manejo de archivos wav
 from scipy.io import wavfile                                                     #Transformar archivos numpy a wav
 import os
-import sys                                                                        #Interactua con el sistema operativo
+import sys
+import Tkinter
+from Tkinter import*                                                                       #Interactua con el sistema operativo
 
 
 
@@ -101,7 +103,7 @@ class Microphone:
 
         return True
 # Clase  menu
-class Opcion :
+'''class Opcion :
     ver=False
     def __init__(self,texto, pos,tam,ido,actual):
         self.ido=ido
@@ -133,7 +135,7 @@ class Opcion :
         self.txt=self.fuente.render(self.texto,True,self.colortxt())
     def dibujar(self):
         self.Enunciado()
-        pantalla.blit(self.txt,self.rect)
+        pantalla.blit(self.txt,self.rect)'''
 
 def cargar():
       mic = Microphone()
@@ -149,21 +151,78 @@ def cargar():
       plt.plot(f[:1000], X_mag[:1000]) # magnitude spectrum
       plt.xlabel('Frequency (Hz)')
       FrecNota=f[result_args[0]]
-      print FrecNota,                                                            #<<<<<--------
+      print FrecNota                                                            #<<<<<--------
       return FrecNota
 
+def Stop():
+    Valid=False
+
+
+
+def Comparar():
+       frec=int(cargar())
+
+
+    #frec=int(cargar())
+
+def Grafic():
+    #root.iconify()
+    otra_ventana= Tkinter.Toplevel(root)
+    Valid=True
+    otra_ventana.geometry("339x95")
+    otra_ventana.resizable(False, False)
+    Phot=PhotoImage(file='Tab1.gif')
+    fondo=Label(otra_ventana,image=Phot)
+    fondo.pack()
+    bot = Tkinter.Button(otra_ventana,text="Detener",cursor='hand1', command= Stop)
+    bot.place(x=230, y=60, width=100, height=30)
+    bot1 = Tkinter.Button(otra_ventana,text="Empezar",cursor='hand1', command=Comparar)
+    bot1.place(x=130, y=60, width=100, height=30)
+    root.mainloop()
 #main
 if __name__ == '__main__':
-    main()
-    pygame.display.flip()
-    dibujo=0
+    #main()
+    #pygame.display.flip()
+    #dibujo=0
+    i=0
+    a=0
     nota=0
     time=2000
-    lttnota='O'
-    vatTerminal=0
+    Valid=True
+    #lttnota='O'
 
-    '''
-    opciones=[Opcion("Grabar",(60,25),60,1,0),Opcion("Prueba",(60,80),60,2,0),Opcion("Prueba",(60,135),60,3,0),Opcion("Cerrar",(60,190),60,4,0)]
+
+
+
+root = Tkinter.Tk()
+root.title("Interprete Graficador")
+root.geometry("300x300")
+root.resizable(False, False)
+photo = PhotoImage(file='Intro.gif')
+fondo=Label(root,image=photo)
+fondo.pack()
+boton = Tkinter.Button(root,text="Grabar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=Grafic)
+boton.place(x=80, y=160, width=150, height=30)
+boton1 = Tkinter.Button(root,text="Revisualizar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=Grafic)
+boton1.place(x=80 , y=210, width=150, height=30)
+boton2 = Tkinter.Button(root,text="Salir",activeforeground="#6e0987", relief='flat',cursor='hand1', command=root.destroy)
+boton2.place(x=177, y=260, width=100, height=30)
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''    opciones=[Opcion("Grabar",(60,25),60,1,0),Opcion("Prueba",(60,80),60,2,0),Opcion("Prueba",(60,135),60,3,0),Opcion("Cerrar",(60,190),60,4,0)]
     fondo=pygame.image.load('fondovioleta.jpg').convert()
     todos=pygame.sprite.Group()
     #todos.add(n)
@@ -208,16 +267,16 @@ if __name__ == '__main__':
         #Redibujado y actualizacion
 
         #Acoplar frecuencia en  la escala segun la nota a afinar
-	if time==2000:
-           frec=int(cargar())
-	   time=0
-	time+=1
+if time==2000:
+   frec=int(cargar())
+   time=0
+   time+=1
         if frec>=(nota-5) and frec <= (nota+5):
 		          notadp = tiponota.render(lttnota,0,VERDE)
         else:
 		notadp = tiponota.render(lttnota,0,ROJO)
 
-        pantalla.blit(notadp,[500,140])'''
-        ########################################################
-    todos.draw(pantalla)
-    pygame.display.update()
+pantalla.blit(notadp,[500,140])
+        #######################################################
+todos.draw(pantalla)
+pygame.display.update()'''
