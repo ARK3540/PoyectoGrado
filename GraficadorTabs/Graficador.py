@@ -154,14 +154,26 @@ def cargar():
       print FrecNota                                                            #<<<<<--------
       return FrecNota
 
-def Stop():
-    Valid=False
-
-
+def Stop (boolean):
+    if boolean == (True):
+     boolean=False
 
 def Comparar():
-       frec=int(cargar())
+    i=0
+    while (Valid==TRUE):
+        frec=int(cargar())
+        i=i+1
+        if i ==(50):
+            break
+        if frec>(70):
+            i+1
 
+def VentanaPy():
+    pantalla=pygame.display.set_mode([500,708])
+    pygame.display.set_caption("Interprete Graficador")
+    fondo=pygame.image.load('Blanco.jpg')
+    pantalla.blit(fondo,(0,0))
+    pygame.display.update()
 
     #frec=int(cargar())
 
@@ -201,7 +213,7 @@ root.resizable(False, False)
 photo = PhotoImage(file='Intro.gif')
 fondo=Label(root,image=photo)
 fondo.pack()
-boton = Tkinter.Button(root,text="Grabar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=Grafic)
+boton = Tkinter.Button(root,text="Grabar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=Comparar)
 boton.place(x=80, y=160, width=150, height=30)
 boton1 = Tkinter.Button(root,text="Revisualizar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=Grafic)
 boton1.place(x=80 , y=210, width=150, height=30)
@@ -241,7 +253,7 @@ root.mainloop()
                             fondo=pygame.image.load('TablaturaPlantilla.png').convert()
 
                         if op.ido==2:
-                            dibujo=2
+                            dibujo=2pygame.display.update()
                             op.actual=1
 
                         if op.ido==3:
