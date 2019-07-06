@@ -14,7 +14,7 @@ import os
 import sys
 import Tkinter
 from Tkinter import*                                                                       #Interactua con el sistema operativo
-
+import pickle
 
 
 #Asignamos colores a variables (R,G,B)
@@ -35,14 +35,9 @@ pygame.init()
 #Asignamos de fuentes y tamano de Texto a variables global
 fuente=pygame.font.Font("dalila.ttf",25)
 Numero = pygame.font.Font("dalila.ttf",25)
-Numero2 = pygame.font.Font("dalila.ttf",18)
+Numero2 = pygame.font.Font("dalila.ttf",35)
 tiponota = pygame.font.Font("dalila.ttf",90)
 simbolo = pygame.font.Font("dalila.ttf",120)
-
-
-
-
-
 #microfono
 class Microphone:
 
@@ -56,8 +51,6 @@ class Microphone:
             sum_squares += n*n
         rms = math.pow(sum_squares/count,0.5);
         return rms * 1000
-
-
 
     def passiveListen(self,persona):
         CHUNK = 1024; RATE = 8000; THRESHOLD = 200; LISTEN_TIME = 20
@@ -82,14 +75,11 @@ class Microphone:
             stream.stop_stream()
             stream.close()
             return False
-
-
         # append all the chunks
         all.append(input)
         for i in range(0, 7):
             data = stream.read(CHUNK)
             all.append(data)
-
         # save the audio data
         data = ''.join(all)
         stream.stop_stream()
@@ -100,46 +90,15 @@ class Microphone:
         wf.setframerate(RATE)
         wf.writeframes(data)
         wf.close()
-
         return True
-# Clase  menu
-'''class Opcion :
-    ver=False
-    def __init__(self,texto, pos,tam,ido,actual):
-        self.ido=ido
-        self.actual=actual
-        self.texto=texto
-        self.pos=pos
-        self.fuente=pygame.font.Font("dalila.ttf",tam)
-        self.set_rect()
-        self.dibujar()
-    def set_rect(self):
-        self.Enunciado()
-        self.rect=self.txt.get_rect()
-        self.rect.topleft=self.pos
 
-    def colortxt(self):
-        if self.ver:
-            if self.actual:
-                return(AZUL)
-            else:
-                return(VERDE)
-
-        else:
-            if self.actual:
-                return(AZUL)
-            else:
-                return(LETRA)
-
-    def Enunciado(self):
-        self.txt=self.fuente.render(self.texto,True,self.colortxt())
-    def dibujar(self):
-        self.Enunciado()
-        pantalla.blit(self.txt,self.rect)'''
+class Nota_mastil:
+    def __init__(self,cuerda,traste):
+        self.cuerda=cuerda
+        self.traste=traste
 
 def cargar():
       mic = Microphone()
-
       a=mic.passiveListen('ok Google')
       x, fs = librosa.load('Audio.wav', sr=44100)
       f = numpy.linspace(0, fs, 8192)
@@ -158,53 +117,407 @@ def Stop (boolean):
     if boolean == (True):
      boolean=False
 
-def Comparar():
+def Comparar(chulo):
+    cuerda=0
+    traste=0
     i=0
     while (Valid==TRUE):
         frec=int(cargar())
         i=i+1
-        if i ==(50):
+        if i ==(5):
             break
-        if frec>(70):
-            i+1
+        if frec>(70) and frec<(276):
+            if frec>=(80) and frec<=(82):
+                cuerda= 4
+                traste =0
+                e=Nota_mastil(cuerda,traste)
+                chulo.append(e)
+                continue
 
+            if frec>=(105) and frec<=(109):
+                    cuerda=3
+                    traste=0
+                    e=Nota_mastil(cuerda,traste)
+                    chulo.append(e)
+                    continue
+
+            if frec>=(137) and frec<=(141):
+                    cuerda=2
+                    traste=0
+                    e=Nota_mastil(cuerda,traste)
+                    chulo.append(e)
+
+                    continue
+
+            if frec>=(187) and frec<=(190):
+                    cuerda=1
+                    traste=0
+                    e=Nota_mastil(cuerda,traste)
+                    chulo.append(e)
+                    continue
+
+###############################################################################
+            if frec>=(207) and frec<=(276):
+                if frec>=(208) and frec<=(210):
+                        cuerda=1
+                        traste=1
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(219) and frec<=(222):
+                        cuerda=1
+                        traste=2
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(229) and frec<=(233):
+                        cuerda=1
+                        traste=3
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(245) and frec<=(249):
+                        cuerda=1
+                        traste=4
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(256) and frec<=(259):
+                        cuerda=1
+                        traste=5
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(272) and frec<=(276):
+                        cuerda=1
+                        traste=6
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+            if frec>=(152) and frec<=(206):
+                if frec>=(148) and frec<=(152):
+                        cuerda=2
+                        traste=1
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(164) and frec<=(168):
+                        cuerda=2
+                        traste=2
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(175) and frec<=(179):
+                        traste=3
+                        cuerda=2
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(186) and frec<=(190):
+                        cuerda=2
+                        traste=4
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(197) and frec<=(201):
+                        cuerda=2
+                        traste=5
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(203) and frec<=(205):
+                        cuerda=2
+                        traste=6
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+            if frec>=(152) and frec<=(206):
+
+                if frec>=(155) and frec<=(157):
+                        cuerda=3
+                        traste=1
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(122) and frec<=(124):
+                        cuerda=3
+                        traste=2
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(192) and frec<=(194):
+                        cuerda=3
+                        traste=3
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(133) and frec<=(135):
+                        cuerda=3
+                        traste=4
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(138) and frec<=(140):
+                        cuerda=3
+                        traste=5
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(149) and frec<=(151):
+                        cuerda=3
+                        traste=6
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+            if frec>=(152) and frec<=(206):
+
+                if frec>=(84) and frec<=(87):
+                        cuerda=4
+                        traste=1
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(90) and frec<=(92):
+                        cuerda=4
+                        traste=2
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(95) and frec<=(97):
+                        cuerda=4
+                        traste=3
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        return
+
+                if frec>=(101) and frec<=(103):
+                        cuerda=4
+                        traste=4
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(106) and frec<=(108):
+                        cuerda=4
+                        traste=5
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(112) and frec<=(114):
+                        cuerda=4
+                        traste=6
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+################################################################################
+            if frec>=(138) and frec<=(178):
+
+                if frec>=(138) and frec<=(140):
+                        cuerda=1
+                        traste=7
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(149) and frec<=(151):
+                        cuerda=1
+                        traste=8
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(160) and frec<=(162):
+                        cuerda=1
+                        traste=9
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(165) and frec<=(167):
+                        cuerda=1
+                        traste=10
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(176) and frec<=(178):
+                        cuerda=1
+                        traste=11
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+            if frec>=(117) and frec<=(222):
+
+                if frec>=(117) and frec<=(119):
+                        cuerda=2
+                        traste=8
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(120) and frec<=(122):
+                        cuerda=2
+                        traste=11
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(122) and frec<=(124):
+                        cuerda=2
+                        traste=9
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(133) and frec<=(135):
+                        cuerda=2
+                        traste=10
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(219) and frec<=(221):
+                        cuerda=2
+                        traste=7
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+            if frec>=(79) and frec<=(103):
+
+                if frec>=(79) and frec<=(81):
+                        cuerda=3
+                        traste=7
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(85) and frec<=(87):
+                        cuerda=3
+                        traste=8
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(90) and frec<=(92):
+                        cuerda=3
+                        traste=9
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(95) and frec<=(97):
+                        cuerda=3
+                        traste=10
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(101) and frec<=(103):
+                        cuerda=3
+                        traste=11
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+            if frec>=(74) and frec<=(124):
+
+                if frec>=(74) and frec<=(76):
+                        cuerda=4
+                        traste=11
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(122) and frec<=(124):
+                        cuerda=4
+                        traste=7
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(128) and frec<=(130):
+                        cuerda=4
+                        traste=8
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+
+                if frec>=(133) and frec<=(135):
+                        cuerda=4
+                        traste=9
+                        e=Nota_mastil(cuerda,traste)
+                        chulo.append(e)
+                        continue
+################################################################################
 def VentanaPy():
     pantalla=pygame.display.set_mode([500,708])
     pygame.display.set_caption("Interprete Graficador")
     fondo=pygame.image.load('Blanco.jpg')
     pantalla.blit(fondo,(0,0))
     pygame.display.update()
+    lista_notas=[]
+    Comparar(lista_notas)
+    j=0
+    k=0
+    with open('save.bin', 'w') as archivo:
+        pickle.dump(lista_notas,archivo)
+    for e in lista_notas:
+        pantalla.blit(Numero2.render(str(e.traste),True,[254,127,156]),[70 + (j*35),58+(e.cuerda*14)+ (k*102)])
+        j+=1
+        if j==10:
+            j=0
+            k+=1
+    pygame.display.update()
 
-    #frec=int(cargar())
-
-def Grafic():
-    #root.iconify()
-    otra_ventana= Tkinter.Toplevel(root)
-    Valid=True
-    otra_ventana.geometry("339x95")
-    otra_ventana.resizable(False, False)
-    Phot=PhotoImage(file='Tab1.gif')
-    fondo=Label(otra_ventana,image=Phot)
-    fondo.pack()
-    bot = Tkinter.Button(otra_ventana,text="Detener",cursor='hand1', command= Stop)
-    bot.place(x=230, y=60, width=100, height=30)
-    bot1 = Tkinter.Button(otra_ventana,text="Empezar",cursor='hand1', command=Comparar)
-    bot1.place(x=130, y=60, width=100, height=30)
-    root.mainloop()
+def graficar_recuperado():
+    pantalla=pygame.display.set_mode([500,708])
+    pygame.display.set_caption("ultima guardada")
+    fondo=pygame.image.load('Blanco.jpg')
+    pantalla.blit(fondo,(0,0))
+    pygame.display.update()
+    with open("save.bin","r") as archivo:
+        lista_graficar=pickle.load(archivo)
+    j=0
+    k=0
+    for e in lista_graficar:
+        pantalla.blit(Numero2.render(str(e.traste),True,[254,127,156]),[70 + (j*35),58+(e.cuerda*14)+ (k*102)])
+        j+=1
+        if j==10:
+            j=0
+            k+=1
+    pygame.display.update()
 #main
 if __name__ == '__main__':
-    #main()
-    #pygame.display.flip()
-    #dibujo=0
     i=0
     a=0
     nota=0
+    cuerda=0
+    traste=0
     time=2000
     Valid=True
-    #lttnota='O'
-
-
-
 
 root = Tkinter.Tk()
 root.title("Interprete Graficador")
@@ -213,82 +526,10 @@ root.resizable(False, False)
 photo = PhotoImage(file='Intro.gif')
 fondo=Label(root,image=photo)
 fondo.pack()
-boton = Tkinter.Button(root,text="Grabar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=Comparar)
+boton = Tkinter.Button(root,text="Grabar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=VentanaPy)
 boton.place(x=80, y=160, width=150, height=30)
-boton1 = Tkinter.Button(root,text="Revisualizar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=Grafic)
+boton1 = Tkinter.Button(root,text="Revisualizar",activeforeground="#6e0987", relief='flat',cursor='hand1', command=graficar_recuperado)
 boton1.place(x=80 , y=210, width=150, height=30)
 boton2 = Tkinter.Button(root,text="Salir",activeforeground="#6e0987", relief='flat',cursor='hand1', command=root.destroy)
 boton2.place(x=177, y=260, width=100, height=30)
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''    opciones=[Opcion("Grabar",(60,25),60,1,0),Opcion("Prueba",(60,80),60,2,0),Opcion("Prueba",(60,135),60,3,0),Opcion("Cerrar",(60,190),60,4,0)]
-    fondo=pygame.image.load('fondovioleta.jpg').convert()
-    todos=pygame.sprite.Group()
-    #todos.add(n)
-    while aux:
-        puntos=[]
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                aux=False
-            if event.type==pygame.MOUSEBUTTONDOWN:
-                for op in opciones:
-                    if op.rect.collidepoint(pygame.mouse.get_pos()):
-                        if op.ido==1:
-                            dibujo=1
-                            op.actual=1
-                            pygame.display.set_mode([600,300])
-                            fondo=pygame.image.load('TablaturaPlantilla.png').convert()
-
-                        if op.ido==2:
-                            dibujo=2pygame.display.update()
-                            op.actual=1
-
-                        if op.ido==3:
-                            dibujo=3
-                            op.actual=1
-
-                        if op.ido==4:
-                            dibujo=4
-                            op.actual=1
-                            sys.exit()
-
-                    for op2 in opciones:
-                        if op2.ido!=dibujo:
-                            op2.actual=0
-        #pantalla.fill(BLANCO)
-        pantalla.blit(fondo,(0,0))
-        for op in opciones:
-            if op.rect.collidepoint(pygame.mouse.get_pos()):
-                op.ver=True
-            else:
-                op.ver=False
-            op.dibujar()
-        #Redibujado y actualizacion
-
-        #Acoplar frecuencia en  la escala segun la nota a afinar
-if time==2000:
-   frec=int(cargar())
-   time=0
-   time+=1
-        if frec>=(nota-5) and frec <= (nota+5):
-		          notadp = tiponota.render(lttnota,0,VERDE)
-        else:
-		notadp = tiponota.render(lttnota,0,ROJO)
-
-pantalla.blit(notadp,[500,140])
-        #######################################################
-todos.draw(pantalla)
-pygame.display.update()'''
