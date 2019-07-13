@@ -371,7 +371,7 @@ class tablatura:
 
     def Llenar_lista(self):
         i=0
-        limite=2
+        limite=30
         while i<limite:
             f_n=Frecuencia()
             f1=f_n.Cargar()
@@ -379,7 +379,7 @@ class tablatura:
             f.Comparar()
             if f.valid:
                 self.lista_notas.append(f)
-                i+=1
+            i+=1
 
     def Grabar(self):
         with open('save.bin', 'w') as archivo:
